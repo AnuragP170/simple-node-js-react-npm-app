@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+        nodejs 'NodeJS' // Use the name you configured in the Global Tool Configuration
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -22,7 +25,6 @@ pipeline {
         }
     }
 }
-
 
 // pipeline {
 //     agent any
