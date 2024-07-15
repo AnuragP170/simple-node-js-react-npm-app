@@ -18,16 +18,6 @@ pipeline {
                 }
             }
         }
-        stage('Build') {
-            steps {
-                sh 'npm install'
-            }
-        }
-        stage('Test') { 
-            steps {
-                sh './jenkins/scripts/test.sh' 
-            }
-        }
 	stage('OWASP Dependency-Check Vulnerabilities') {
       steps {
         dependencyCheck additionalArguments: ''' 
@@ -39,6 +29,17 @@ pipeline {
         dependencyCheckPublisher pattern: 'dependency-check-report.xml'
       }
     }
+        stage('Build') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage('Test') { 
+            steps {
+                sh './jenkins/scripts/test.sh' 
+            }
+        }
+
         stage('Deliver') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
